@@ -6,12 +6,45 @@ const TestMap = () => {
     const testing = QuestionList;
     const [showHint, setShowHint] = useState(false);
     const [selectedQuestion, setSelectedQuestion] = useState(testing[0]);
+    const [allAnswer, setAllAnswer] = useState([]);
+    const [changeRadio, setChangeRadio] = useState('');
 
     useEffect(() => {
-        activOne();
+        activeOne();
     }, []);
 
-    const activOne = () => {
+    const clearRadioSelection = () => {
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+        });
+    };
+
+    const onChange = e => {
+        let radioValue = e.target.value;
+        setChangeRadio(radioValue);
+        console.log('текущие ' + radioValue);
+    };
+
+    const saveAnsver = e => {
+        const btn = document.querySelector('.active');
+        let a = btn.innerHTML;
+        btn.classList.remove('active');
+        btn.setAttribute('disabled', 'disabled');
+
+        const btns = document.querySelectorAll('.btn');
+        const firstEnabledBtn = Array.from(btns).find(item => !item.hasAttribute('disabled'));
+        if (firstEnabledBtn) {
+            firstEnabledBtn.click();
+            clearRadioSelection();
+        }
+
+        console.log(a);
+        setAllAnswer(allAnswer => [...allAnswer, changeRadio]);
+        console.log('предыдущие ' + allAnswer);
+    };
+
+    const activeOne = () => {
         let buttons = document.querySelectorAll('.btn');
         buttons[0].classList.add('active');
     };
@@ -23,6 +56,7 @@ const TestMap = () => {
             button.classList.remove('active');
         }
         let but = e.target;
+        clearRadioSelection();
         but.classList.add('active');
 
         const selected = testing.find(item => item.id == but.innerHTML);
@@ -32,7 +66,7 @@ const TestMap = () => {
     const handleHintClick = () => {
         setShowHint(!showHint);
     };
-
+    console.log(allAnswer);
     return (
         <>
             <span>
@@ -45,12 +79,27 @@ const TestMap = () => {
                         {item.id}
                     </button>
                 ))}
+            <h2>{selectedQuestion.question}</h2>
             {selectedQuestion.answers.map((item, i) => (
-                <p>{item.text}</p>
+                <div className='form-check' key={i}>
+                    <input
+                        key={i}
+                        className='check-answer'
+                        name='form-check-input'
+                        type='radio'
+                        id={`input${i}`}
+                        value={item.text}
+                        onChange={onChange}
+                    />
+                    <label className='form-check-label' htmlFor={`input${i}`}>
+                        {item.text}
+                    </label>
+                </div>
             ))}
 
-            <div>{selectedQuestion.question}</div>
-
+            <button className='save' onClick={saveAnsver}>
+                Save
+            </button>
             {showHint && <p className='hint'>{selectedQuestion.hint}</p>}
             <button onClick={handleHintClick}> Show hint</button>
         </>
