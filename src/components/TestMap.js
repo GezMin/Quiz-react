@@ -5,8 +5,7 @@ import './quiz.scss';
 const TestMap = () => {
     const testing = QuestionList;
     const [showHint, setShowHint] = useState(false);
-    const [showHintText, setShowHintText] = useState(testing[0].hint);
-    const [question, setQuestion] = useState(testing[0].question);
+    const [selectedQuestion, setSelectedQuestion] = useState(testing[0]);
 
     useEffect(() => {
         activOne();
@@ -18,35 +17,20 @@ const TestMap = () => {
     };
 
     const handleClick = e => {
+        setShowHint(false);
         let buttons = document.querySelectorAll('.btn');
         for (let button of buttons) {
             button.classList.remove('active');
         }
         let but = e.target;
         but.classList.add('active');
-        // console.log(but.innerHTML);
-        const questionResult = testing.map(item => {
-            if (item.id == but.innerHTML) {
-                // console.log(item.hint);
-                return item.question;
-            }
-        });
-        const questionResult2 = testing.map(item => {
-            if (item.id == but.innerHTML) {
-                // console.log(item.hint);
-                return item.hint;
-            }
-        });
-        setQuestion(questionResult);
-        setShowHintText(questionResult2);
+
+        const selected = testing.find(item => item.id == but.innerHTML);
+        setSelectedQuestion(selected);
     };
 
     const handleHintClick = () => {
-        if (showHint) {
-            setShowHint(false);
-        } else {
-            setShowHint(true);
-        }
+        setShowHint(!showHint);
     };
 
     return (
@@ -61,10 +45,14 @@ const TestMap = () => {
                         {item.id}
                     </button>
                 ))}
-            <div>{question}</div>
+            {selectedQuestion.answers.map((item, i) => (
+                <p>{item.text}</p>
+            ))}
 
-            {showHint && <p className='hint'>{showHintText}</p>}
-            <button onClick={handleHintClick}>Show hint</button>
+            <div>{selectedQuestion.question}</div>
+
+            {showHint && <p className='hint'>{selectedQuestion.hint}</p>}
+            <button onClick={handleHintClick}> Show hint</button>
         </>
     );
 };
