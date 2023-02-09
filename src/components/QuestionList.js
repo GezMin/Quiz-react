@@ -48,7 +48,7 @@ export const QuestionList = [
             { text: 'npm', correct: false },
             { text: 'html', correct: false },
             { text: 'Redux', correct: true },
-            { text: 'php', correct: true },
+            { text: 'php', correct: false },
         ],
         hint: 'препроцесор',
     },
