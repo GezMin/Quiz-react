@@ -15,6 +15,7 @@ const TestMap = () => {
         clearRadioSelection();
     }, []);
 
+    // делаю неактивной кнопку Save если не один ответ не выбран
     const changeQuesttion = () => {
         const radios = document.querySelectorAll('input[type="radio"]');
         const allRadiosNotChecked = Array.from(radios).every(radio => !radio.checked);
@@ -26,6 +27,7 @@ const TestMap = () => {
         }
     };
 
+    // очищаю все инпуты
     const clearRadioSelection = () => {
         const radios = document.querySelectorAll('input[type="radio"]');
         radios.forEach(radio => {
@@ -34,6 +36,7 @@ const TestMap = () => {
         changeQuesttion();
     };
 
+    // определяем ответ который выбрал пользователь
     const onChange = e => {
         let radioValue = e.target.value;
         setChangeRadio(radioValue);
@@ -41,6 +44,7 @@ const TestMap = () => {
         changeQuesttion();
     };
 
+    // сохраняем результат и переходим автоматически к следующему вопросу при условии если есть активные кнопки
     const saveAnsver = e => {
         const btn = document.querySelector('.active');
         btn.classList.remove('active');
@@ -50,7 +54,7 @@ const TestMap = () => {
         const btnSave = document.querySelector('.save');
 
         // проверяет есть ли активные кнопки
-        const allBtnNotActive = Array.from(btns).every(btn => !btn.hasAttribute('disabled'));
+        // const allBtnNotActive = Array.from(btns).every(btn => !btn.hasAttribute('disabled'));
 
         // проверяет массив кнопок и находит первую у которой нет атрибута 'disabled'
         const firstEnabledBtn = Array.from(btns).find(item => !item.hasAttribute('disabled'));
@@ -64,15 +68,17 @@ const TestMap = () => {
 
         setAllAnswer(allAnswer => [...allAnswer, changeRadio]);
 
-        if (allBtnNotActive) {
-        }
+        // if (allBtnNotActive) {
+        // }
     };
 
+    // при загрузке выставляю первой кнопке класс Active
     const activeOne = () => {
         let buttons = document.querySelectorAll('.btn');
         buttons[0].classList.add('active');
     };
 
+    // дает возможноть переключится на другой вопрос по клику по кнопке
     const handleClick = e => {
         setShowHint(false);
         let buttons = document.querySelectorAll('.btn');
@@ -87,6 +93,7 @@ const TestMap = () => {
         setSelectedQuestion(selected);
     };
 
+    // показывает и срывает подсказку при клике
     const handleHintClick = () => {
         setShowHint(!showHint);
     };
@@ -94,8 +101,8 @@ const TestMap = () => {
     // показывает массив ответов
     // console.log(allAnswer);
 
+    // создаем массив и ищем совпадения в объекте с ответами
     const results = [];
-
     allAnswer.forEach((answer, i) => {
         const question = QuestionList.find(q => q.id === i + 1);
         if (question && question.answers.find(a => a.text === answer)) {
@@ -103,6 +110,7 @@ const TestMap = () => {
         }
     });
 
+    // функция отрабатывает когда на все вопросы получены ответы и все кнопки вопросов неактивны
     const resultAnswer = () => {
         return (
             <>
@@ -126,10 +134,7 @@ const TestMap = () => {
                 <>{resultAnswer()}</>
             ) : (
                 <>
-                    <span>
-                        Список вопросов:
-                        <br />
-                    </span>
+                    <div>Список вопросов:</div>
                     {testing &&
                         testing.map((item, i) => (
                             <button className='btn' onClick={handleClick} key={item.id}>
