@@ -1,6 +1,7 @@
 export const QuestionList = [
     {
-        text: 'What is the capital of France?',
+        id: 1,
+        question: 'What is the capital of France?',
         answers: [
             { text: 'Paris', correct: true },
             { text: 'Berlin', correct: false },
@@ -10,30 +11,44 @@ export const QuestionList = [
         hint: 'It is one of the most famous cities in the world',
     },
     {
-        text: 'Какой язык учить',
+        id: 2,
+        question: 'Какой язык учить',
         answers: [
             { text: 'React', correct: true },
             { text: 'Angular 8', correct: false },
             { text: 'Vie', correct: false },
         ],
-        hint: 'такой же какой и я',
+        hint: '???',
     },
 
     {
-        text: 'какую базу использовать',
+        id: 3,
+        question: 'Какую базу использовать',
         answers: [
-            { text: 'MySQL', correct: false },
+            { text: 'PHP', correct: false },
             { text: 'MongoDB', correct: true },
             { text: 'Oraqle', correct: false },
         ],
         hint: 'даже не знаю',
     },
     {
-        text: 'что такое Sass',
+        id: 4,
+        question: 'что такое Sass',
         answers: [
             { text: 'компилятор', correct: true },
             { text: 'style', correct: false },
             { text: 'Redux', correct: false },
+        ],
+        hint: 'препроцесор',
+    },
+    {
+        id: 5,
+        question: 'к чему относится reducer',
+        answers: [
+            { text: 'npm', correct: false },
+            { text: 'html', correct: false },
+            { text: 'Redux', correct: true },
+            { text: 'php', correct: true },
         ],
         hint: 'препроцесор',
     },

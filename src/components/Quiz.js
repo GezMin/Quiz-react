@@ -27,11 +27,7 @@ const Quiz = () => {
                 <p className='question'>{question.text}</p>
                 <div className='answers'>
                     {question.answers.map((answer, index) => (
-                        <button
-                            key={answer.text}
-                            className={answers.includes(index) ? 'active' : ''}
-                            onClick={() => handleAnswerClick(index)}
-                        >
+                        <button key={answer.text} onClick={() => handleAnswerClick(index)}>
                             {answer.text}
                         </button>
                     ))}

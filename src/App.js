@@ -1,7 +1,15 @@
-import Quiz from './components/Quiz';
+// import Quiz from './components/Quiz';
+import TestMap from './components/TestMap';
+import './app.scss';
 
 function App() {
-    return <Quiz />;
+    return (
+        <div className='container'>
+            {/* <Quiz /> */}
+
+            <TestMap />
+        </div>
+    );
 }
 
 export default App;
