@@ -99,28 +99,46 @@ const TestMap = () => {
     };
 
     // показывает массив ответов
-    // console.log(allAnswer);
+    console.log(allAnswer);
 
     // создаем массив и ищем совпадения в объекте с ответами
-    const results = [];
-    allAnswer.forEach((answer, i) => {
-        const question = QuestionList.find(q => q.id === i + 1);
-        if (question && question.answers.find(a => a.text === answer)) {
-            results[i] = question.answers.find(a => a.text === answer).correct;
-        }
-    });
+    // const results = [];
+    // allAnswer.forEach((answer, i) => {
+    //     const question = QuestionList.find(q => q.id === i + 1);
+    //     if (question && question.answers.find(a => a.text === answer)) {
+    //         results[i] = question.answers.find(a => a.text === answer).correct;
+    //     }
+    // });
 
     // функция отрабатывает когда на все вопросы получены ответы и все кнопки вопросов неактивны
     const resultAnswer = () => {
+        const results = [];
+        for (let i = 0; i < allAnswer.length; i++) {
+            const [id, answer] = allAnswer[i].split(',');
+            const question = QuestionList.find(q => q.id === Number(id));
+            if (question) {
+                const a = question.answers.find(a => a.text === answer);
+                if (a) {
+                    results[i] = {
+                        id: id,
+                        text: answer,
+                        correct: a.correct,
+                        question: question.question,
+                    };
+                }
+            }
+        }
+        console.log(results);
+
         return (
             <>
                 {results.map((result, i) => (
                     <h2 key={i}>
-                        Вопрос {i + 1}:
-                        {result ? (
-                            <span style={{ color: 'green', fontWeight: 700 }}>ПРАВИЛЬНО</span>
+                        Вопрос №{result.id} "{result.question}" Ваш ответ {result.text} :
+                        {result.correct ? (
+                            <span style={{ color: 'green', fontWeight: 700 }}>правильно</span>
                         ) : (
-                            <span style={{ color: 'red', fontWeight: 700 }}>НЕ ПРАВИЛЬНО</span>
+                            <span style={{ color: 'green', fontWeight: 700 }}> не правильно</span>
                         )}
                     </h2>
                 ))}
@@ -150,7 +168,7 @@ const TestMap = () => {
                                 name='form-check-input'
                                 type='radio'
                                 id={`input${i}`}
-                                value={item.text}
+                                value={[selectedQuestion.id, item.text]}
                                 onChange={onChange}
                             />
                             <label className='form-check-label' htmlFor={`input${i}`}>
