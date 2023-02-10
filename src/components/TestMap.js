@@ -133,14 +133,18 @@ const TestMap = () => {
         return (
             <>
                 {results.map((result, i) => (
-                    <h2 key={i}>
-                        Вопрос №{result.id} "{result.question}" Ваш ответ {result.text} :
+                    <div key={i}>
+                        <h4>Вопрос №{result.id}</h4>
+                        <h2>
+                            "{result.question}" Ваш ответ {result.text}
+                        </h2>
+
                         {result.correct ? (
-                            <span style={{ color: 'green', fontWeight: 700 }}>правильно</span>
+                            <h3 style={{ color: 'green', fontWeight: 700 }}>правильно</h3>
                         ) : (
-                            <span style={{ color: 'green', fontWeight: 700 }}> не правильно</span>
+                            <h3 style={{ color: 'red', fontWeight: 700 }}> не правильно</h3>
                         )}
-                    </h2>
+                    </div>
                 ))}
             </>
         );
