@@ -41,48 +41,4 @@ export const QuestionList = [
         ],
         hint: 'препроцесор',
     },
-    {
-        id: 5,
-        question: 'к чему относится reducer',
-        answers: [
-            { text: 'npm', correct: false },
-            { text: 'html', correct: false },
-            { text: 'Redux', correct: true },
-            { text: 'php', correct: false },
-        ],
-        hint: 'препроцесор',
-    },
-    {
-        id: 6,
-        question: 'к чему относится reducer',
-        answers: [
-            { text: 'npm', correct: false },
-            { text: 'html', correct: false },
-            { text: 'Redux', correct: true },
-            { text: 'php', correct: false },
-        ],
-        hint: 'препроцесор',
-    },
-    {
-        id: 7,
-        question: 'к чему относится reducer',
-        answers: [
-            { text: 'npm', correct: false },
-            { text: 'html', correct: false },
-            { text: 'Redux', correct: true },
-            { text: 'php', correct: false },
-        ],
-        hint: 'препроцесор',
-    },
-    {
-        id: 8,
-        question: 'к чему относится reducer',
-        answers: [
-            { text: 'npm', correct: false },
-            { text: 'html', correct: false },
-            { text: 'Redux', correct: true },
-            { text: 'php', correct: false },
-        ],
-        hint: 'препроцесор',
-    },
 ];
